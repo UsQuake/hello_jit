@@ -1,6 +1,6 @@
 # Make executable region for Apple silicon in Rust
 
- ## Generate executable binary code
+ ## 1.Generate executable binary code
  - I'll use below C++ code for execution
  - ```C++
    int fn(int num) {
@@ -8,7 +8,7 @@
    }
    ```
 
- ## Compile codes in assembly.
+ ## 2.Compile codes in assembly.
  - below is armv8-a clang 17.0.1 compiled assembly for upper C++ code. 
  - I used [Compiler Explorer](https://godbolt.org/) to compile as assembly-code.
  - ```ASM
@@ -19,7 +19,7 @@
    add     sp, sp, #16
    ret
    ```
-## Convert assembly-code into ARM-instruction binary code.
+## 3.Convert assembly-code into ARM-instruction binary code.
  - I used [armconverter](https://armconverter.com/) to convert armv8_a asm to hex(binary) code.
  - ```
     0xD10043FF
@@ -28,7 +28,7 @@
     0x910043FF
     0xD65F03C0
    ```
-## Save binary code on executor's memory and execute it.
+## 4.Save binary code on executor's executable region and execute it.
 
  -  ```Rust
 
@@ -43,7 +43,7 @@
     ];
     
     unsafe{
-        //Generate executable memory region with mmap().
+        //Allocate executable memory region with mmap().
         let ptr_shared_mem = mmap(std::ptr::null_mut(), 4 * 5, PROT_WRITE,
         MAP_JIT //Only for Mac_OS
          | MAP_ANON | MAP_PRIVATE,-1,0);
