@@ -6,9 +6,9 @@
 
  ## Setup and Requirements
  
-    - Rust version XXX
-    - Required libraries or tools
-    - Only for Apple-silicon Mac
+    - Rust version 1.71.1 [2021 edition]
+    - Using libc crate(libc Rust FFI) for using mmap() and mprotect().
+    - For now, only Apple-silicon Mac is supported.
 
  ## Step
   ### 1. Generate executable binary code
@@ -80,6 +80,6 @@
     ```
 ## Acknowledge
 
- - 
+ - [simple jit in c](https://blog.reverberate.org/2012/12/hello-jit-world-joy-of-simple-jits.html)
 
   
