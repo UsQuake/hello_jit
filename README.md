@@ -62,7 +62,7 @@
        //Because, What we are doing is actually code injection on runtime,
        //so, If we give permission of exectuable and writeable at same time, It is vulnerable to shellcode injection attack.
 
-        //Finally, 
+        //Finally, convert pointer of executable region into function pointer and call it!
         let func = std::mem::transmute::<*mut c_void, fn(i32) -> i32>(ptr_shared_mem);
         println!("{}",func(3));
     }
