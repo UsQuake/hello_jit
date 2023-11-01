@@ -6,9 +6,9 @@
 
  ## Setup and Requirements
  
- - Rust version 1.71.1 [2021 edition]
- - Using libc crate[version 0.2.149].
- - For now, Only Apple-silicon Mac is supported.
+ - Rust version **1.71.1** [2021 edition]
+ - Using **libc** crate[version 0.2.149].
+ - For now, ***Only Apple-silicon Mac*** is supported.
 
  ## Explanation
  
