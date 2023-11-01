@@ -65,14 +65,14 @@
         std::ptr::copy(code.as_mut_ptr(), ptr_shared_mem as *mut u32, 5);
        //Be done to write executable binary on executable memory region.
 
-       //Now, Change the permissions of the region from writeable to executable.
+       //Now, Change the permission of the region from writeable to executable.
        mprotect(ptr_shared_mem, 4 * 5, PROT_EXEC);
 
-       //WARNING: Don't give permission of exectuable and writeable at same time as calling mmap().
+       //WARNING: Don't give permission of executable and writeable at same time as calling mmap().
        //If you give permission of exectuable and writeable at same time,
        //It will be super big security problem.
        //Because, What we are doing is actually code injection on runtime,
-       //so, If we give permission of exectuable and writeable at same time, It is vulnerable to shellcode injection attack.
+       //so, If we give permission of executable and writeable at same time, It is vulnerable to shellcode injection attack.
 
         //Finally, convert pointer of executable region into function pointer and call it!
         let func = std::mem::transmute::<*mut c_void, fn(i32) -> i32>(ptr_shared_mem);
