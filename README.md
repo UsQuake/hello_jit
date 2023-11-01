@@ -10,7 +10,7 @@
  - Using libc crate[version 0.2.149].
  - For now, only Apple-silicon Mac is supported.
 
- ## Step
+ ## Explanation
   ### 1. Generate executable binary code
   - I'll use below C++ code for execution
   - ```C++
