@@ -21,7 +21,19 @@
    ```
 ## Convert assembly-code into ARM-instruction binary code.
  - I used [armconverter](https://armconverter.com/) to convert armv8_a asm to hex(binary) code.
- - ```Rust
+ - ```
+    0xD10043FF
+    0xB9000FE0
+    0xB9400FE0
+    0x910043FF
+    0xD65F03C0
+   ```
+## Save binary code on executor's memory and execute it.
+
+ -  ```Rust
+
+    //Below is compiled binaries of 'int fn(int num)' function
+    
     let mut code: [u32;5] = [
     0xD10043FF,
     0xB9000FE0,
@@ -29,17 +41,32 @@
     0x910043FF,
     0xD65F03C0
     ];
-    ```
- - Save binary code on executor's memory.
+    
     unsafe{
+        //Generate executable memory region with mmap().
         let ptr_shared_mem = mmap(std::ptr::null_mut(), 4 * 5, PROT_WRITE,
         MAP_JIT //Only for Mac_OS
          | MAP_ANON | MAP_PRIVATE,-1,0);
+
+        //Use std::ptr::copy() which is alternative of memcpy() in libc,
+        //But, it's actually runs like memmove() in libc.
         std::ptr::copy(code.as_mut_ptr(), ptr_shared_mem as *mut u32, 5);
-        mprotect(ptr_shared_mem, 4 * 5, PROT_EXEC);
+       //Be done to write executable binary on executable memory region.
+
+       //Now, Change the permissions of the region from writeable to executable.
+       mprotect(ptr_shared_mem, 4 * 5, PROT_EXEC);
+
+       //WARNING: Don't give permission of exectuable and writeable at same time as calling mmap().
+       //If you give permission of exectuable and writeable at same time,
+       //It will be super big security problem.
+       //Because, What we are doing is actually code injection on runtime,
+       //so, If we give permission of exectuable and writeable at same time, It is vulnerable to shellcode injection attack.
+
+        //Finally, 
         let func = std::mem::transmute::<*mut c_void, fn(i32) -> i32>(ptr_shared_mem);
         println!("{}",func(3));
     }
+    ```
 
 
   
