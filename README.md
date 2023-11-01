@@ -1,6 +1,7 @@
 # Make executable region for Apple silicon in Rust
 
-  ## Generate executable binary code
+ ## Generate executable binary code
+  
     - I'll use below C++ code for execution
     - ```C++
           int fn(int num) {
