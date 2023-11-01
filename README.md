@@ -3,12 +3,11 @@
   ## 1. Generate executable binary code
 
     - I'll use below C++ code for execution
-    - 
-    ```C++
+    - ```C++
         int fn(int num) {
           return num;
       }
-    ```
+      ```
     - And this is armv8-a clang 17.0.1 compiled assembly for upper C++ code. 
     - I used [Compiler Explorer](https://godbolt.org/) to do this conversion.
 
