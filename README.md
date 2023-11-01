@@ -1,36 +1,47 @@
-# Make executable region for Apple silicon in Rust
+# Rust ARM binary executor for Apple Silicon
 
- ## 1.Generate executable binary code
- - I'll use below C++ code for execution
- - ```C++
-   int fn(int num) {
+ ## Introduction
+ 
+  This project demonstrates generating and executing ARM binary codes in Rust on Apple silicon.
+
+ ## Setup and Requirements
+ 
+    - Rust version XXX
+    - Required libraries or tools
+    - Only for Apple-silicon Mac
+
+ ## Step
+  ### 1. Generate executable binary code
+  - I'll use below C++ code for execution
+  - ```C++
+    int fn(int num) {
        return num;
-   }
-   ```
+    }
+    ```
 
- ## 2.Compile codes in assembly.
- - below is armv8-a clang 17.0.1 compiled assembly for upper C++ code. 
- - I used [Compiler Explorer](https://godbolt.org/) to compile as assembly-code.
- - ```ASM
-   fn(int):    //@demangled fn(int)
-   sub     sp, sp, #16
-   str     w0, [sp, #12]
-   ldr     w0, [sp, #12]
-   add     sp, sp, #16
-   ret
-   ```
-## 3.Convert assembly-code into ARM-instruction binary code.
- - I used [armconverter](https://armconverter.com/) to convert armv8_a asm to hex(binary) code.
- - ```
-    0xD10043FF
-    0xB9000FE0
-    0xB9400FE0
-    0x910043FF
-    0xD65F03C0
-   ```
-## 4.Save binary code on executor's executable region and execute it.
+  ### 2.Compile codes in assembly.
+  - below is armv8-a clang 17.0.1 compiled assembly for upper C++ code. 
+  - I used [Compiler Explorer](https://godbolt.org/) to compile as assembly-code.
+  - ```ASM
+    fn(int):    //@demangled fn(int)
+    sub     sp, sp, #16
+    str     w0, [sp, #12]
+    ldr     w0, [sp, #12]
+    add     sp, sp, #16
+    ret
+    ```
+ ### 3.Convert assembly-code into ARM-instruction binary code.
+  - I used [armconverter](https://armconverter.com/) to convert armv8_a asm to hex(binary) code.
+  - ```
+     0xD10043FF
+     0xB9000FE0
+     0xB9400FE0
+     0x910043FF
+     0xD65F03C0
+    ```
+ ### 4.Save binary code on executor's executable region and execute it.
 
- -  ```Rust
+  - ```Rust
 
     //Below is compiled binaries of 'int fn(int num)' function
     
@@ -67,6 +78,8 @@
         println!("{}",func(3));
     }
     ```
+## Acknowledge
 
+ - 
 
   
