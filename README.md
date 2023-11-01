@@ -4,7 +4,7 @@
 
     - I'll use below C++ code for execution
     - 
-    ``` C++
+    ```C++
         int fn(int num) {
           return num;
       }
