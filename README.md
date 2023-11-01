@@ -1,7 +1,6 @@
 # Make executable region for Apple silicon in Rust
 
   ## 1. Generate executable binary code
-    ```Rust
 
     - I'll use below C++ code for execution
       ```C++
@@ -12,7 +11,11 @@
     - And this is armv8-a clang 17.0.1 compiled assembly for upper C++ code. 
     - I used [Compiler Explorer](https://godbolt.org/) to do this conversion.
 
-    ```ASM
+ ## 2. Compile codes in assembly.
+ 
+    - below is armv8-a clang 17.0.1 compiled assembly for upper C++ code. 
+    - I used [Compiler Explorer](https://godbolt.org/) to do this conversion.
+    - ```ASM
     fn(int):    //@demangled fn(int)
     sub     sp, sp, #16
     str     w0, [sp, #12]
