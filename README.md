@@ -3,7 +3,7 @@
   ## 1. Generate executable binary code
 
     - I'll use below C++ code for execution
-      ```C++
+    - ```C++
         int fn(int num) {
           return num;
       }
@@ -44,8 +44,6 @@
         let func = std::mem::transmute::<*mut c_void, fn(i32) -> i32>(ptr_shared_mem);
         println!("{}",func(3));
     }
-    
-}
 
 
   
